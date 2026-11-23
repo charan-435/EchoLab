@@ -1,7 +1,7 @@
 // Course-reading cues are deliberately separate from measurements of this clip.
 export function explainSpectrogramSlice({time=0, windowMs=32, kind='voice', originalRms, roomRms} = {}) {
   if (![time, windowMs, originalRms, roomRms].every(Number.isFinite) || originalRms < 0 || roomRms < 0) {
-    return {title:'Prepare a sound to inspect its results', result:'No audio window is selected yet.', meaning:'The guide below describes patterns to look for; it has not identified anything in your recording.', next:'Use Play beside a plot, then pause or drag its time slider.'};
+    return {title:'Prepare a sound to inspect its results', result:'No audio window is selected yet.', meaning:'The guide below describes patterns to look for; it has not identified anything in your recording.', next:'Use Play beside a plot, then pause and click or drag directly on the plot to select a moment.'};
   }
   const limit=1e-7, dryQuiet=originalRms<limit, wetQuiet=roomRms<limit;
   const stamp=`${time.toFixed(3)}–${(time+windowMs/1000).toFixed(3)} s`;

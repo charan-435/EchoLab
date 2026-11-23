@@ -3,8 +3,6 @@ __pycache__/
 *.log
 .venv/
 
-# Generated audio — regenerate with: python simulate.py
-# WAV files ARE committed so GitHub Pages can serve them without a build step.
-
-# One-off patch scripts and preview images
+# Check/test scripts — dev only, not needed to run the site
+checks/
 archive/
