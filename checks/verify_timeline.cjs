@@ -3,8 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
-const source = fs.readFileSync(path.join(__dirname, '../dist/app.js'), 'utf8');
-const math = fs.readFileSync(path.join(__dirname, '../dist/timeline-math.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../docs/app.js'), 'utf8');
+const math = fs.readFileSync(path.join(__dirname, '../docs/timeline-math.js'), 'utf8');
 const ctx = {};
 vm.createContext(ctx);
 vm.runInContext(math.replace(/export /g, ''), ctx);
@@ -66,5 +66,6 @@ for (const n of [64, 256, 512, 1024]) {
   near(dc[0], 20 * Math.log10(.25), .0001); // DC must not get factor two.
 }
 console.log('PASS: playback clock/loop wrapping, plot ranges, gain/peak safety, padded RMS, and Hann-window FFT amplitude at all 4 window sizes.');
+
 
 

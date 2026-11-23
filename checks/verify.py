@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 from scipy.io import wavfile
 
-root = Path(__file__).resolve().parent / '..' / 'dist' / 'data'
+root = Path(__file__).resolve().parent / '..' / 'docs' / 'data'
 d = json.loads((root / 'experiment.json').read_text())
 assert len(d['cases']) == 180
 assert len({c['id'] for c in d['cases']}) == 180
@@ -33,4 +33,5 @@ assert d['validation']['passed']
 assert d['validation']['maxDeltaDb'] < d['validation']['toleranceDb']
 print(f'PASS: 180 exported WAV files independently reproduce C50 and energy splits. Max C50 error {worst:.8f} dB.')
 print('PASS: all 180 energy-duration thresholds and total energies match exported WAVs; map scales cover all values.')
+
 

@@ -1,4 +1,4 @@
-"""Reproducible shoebox image-source experiment. NumPy/SciPy only.
+﻿"""Reproducible shoebox image-source experiment. NumPy/SciPy only.
 
 Uniform energy absorption alpha; pressure reflection sqrt(1-alpha).
 Images at 2*n*L + (-1)**p*s, order sum(abs(2*n-p)).
@@ -12,7 +12,7 @@ from scipy.io import wavfile
 from scipy.signal import fftconvolve, stft, butter, sosfilt
 
 ROOT = Path(__file__).resolve().parent
-OUT = ROOT / 'dist' / 'data'
+OUT = ROOT / 'docs' / 'data'
 FS = 16000
 ROOM = np.array([6., 8., 3.])
 SOURCES = [[3., 1., 1.5], [1., 1., 1.5]]
@@ -113,3 +113,4 @@ def main():
     print(f'Validated {len(cases)} configurations; max convergence change {validation["maxDeltaDb"]:.5f} dB')
 
 if __name__=='__main__': main()
+
