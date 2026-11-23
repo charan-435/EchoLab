@@ -1,0 +1,4 @@
+__pycache__/
+*.log
+.venv/
+echolab/dist/data/*.wav
