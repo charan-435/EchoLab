@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 *.log
 .venv/
+validation.json
 
 # Check/test scripts — dev only, not needed to run the site
 checks/

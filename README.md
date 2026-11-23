@@ -1,4 +1,4 @@
-﻿# EchoLab — A Room Changes Everything
+# EchoLab — A Room Changes Everything
 
 An interactive browser-based lab that teaches signal-processing concepts through classroom acoustics. Built for the DA3021 course.
 
@@ -20,10 +20,9 @@ MMDP-Project/
 │   ├── requirements.txt
 │   └── start.ps1       (local dev server)
 │
-├── data/            # Generated acoustic data (committed for GitHub Pages)
-│   ├── experiment.json   (all 180 cases + metadata)
-│   ├── voice.wav         (synthetic speech sample)
-│   └── *.wav             (180 impulse responses)
+├── data/            # Acoustic data
+│   ├── original/    # Original speech recording (voice.wav)
+│   └── simulated/   # Simulated room data (experiment.json + 180 impulse responses)
 │
 └── docs/            # Presentation materials
     └── (PDF / LaTeX / screenshots)

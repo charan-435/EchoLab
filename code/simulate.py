@@ -12,7 +12,7 @@ from scipy.io import wavfile
 from scipy.signal import fftconvolve, stft, butter, sosfilt
 
 ROOT = Path(__file__).resolve().parent.parent  # repo root
-OUT = ROOT / 'data'
+OUT = ROOT / 'data' / 'simulated'
 FS = 16000
 ROOM = np.array([6., 8., 3.])
 SOURCES = [[3., 1., 1.5], [1., 1., 1.5]]

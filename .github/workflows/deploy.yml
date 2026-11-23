@@ -27,17 +27,24 @@ jobs:
 
       - name: Assemble site
         run: |
-          # Combine code/ (website files) + data/ (audio+json) into one deployable folder
           mkdir -p _site/data
-          # Copy all website files from code/ (exclude simulate.py, requirements, start.ps1)
+          # Copy all website files to root of _site
           cp code/index.html code/app.js code/style.css \
              code/timeline.js code/timeline.css code/timeline-math.js \
              code/study.js code/study.css \
              code/spectrogram-guide.js code/spectrogram-guide.css \
              code/workbench.css \
              _site/
-          # Copy data files (experiment.json, voice.wav, all impulse responses)
+          # Copy all data (original/ and simulated/ audio & json)
           cp -r data/. _site/data/
+          # Also duplicate code/ directory so /code/ URL works if accessed directly
+          mkdir -p _site/code
+          cp code/index.html code/app.js code/style.css \
+             code/timeline.js code/timeline.css code/timeline-math.js \
+             code/study.js code/study.css \
+             code/spectrogram-guide.js code/spectrogram-guide.css \
+             code/workbench.css \
+             _site/code/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
