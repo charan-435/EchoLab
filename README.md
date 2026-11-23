@@ -4,7 +4,7 @@ An interactive browser-based lab that teaches signal-processing concepts through
 
 > **The core question:** move your seat, or treat the room?
 
-🌐 **Live site:** https://charan-435.github.io/MMDP-Project/
+🌐 **Live site:** https://charan-435.github.io/EchoLab
 
 ---
 
