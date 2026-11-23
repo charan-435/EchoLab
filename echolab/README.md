@@ -95,3 +95,67 @@ node echolab/verify_frontend.cjs
 These verify all 180 exported energy summaries, FFT/STFT known-frequency behaviour,
 the small convolution examples, map ranges and referenced UI IDs. They do not
 replace a visual or audio review in a browser.
+
+## Synchronized audio study workbench
+
+The audio lab now prepares the whole selected clip (up to 20 seconds of input plus
+the response tail). Original and room output are padded to a common duration.
+Room audio is aligned by removing the rounded direct-arrival delay for synchronized
+listening; saved comparisons retain physical propagation delay. This distinction
+is disclosed in the UI. The timeline uses the AudioContext clock, not an interval
+counter. Hardware output latency can still cause a small audible/visual offset.
+
+Controls include play/pause, track switching, a time scrubber, click-to-seek,
+full/2-second/0.5-second plot zoom, one-hop stepping, and a repeat interval with a
+20 ms minimum. The pink cursor and shaded STFT window are shared by the waveform
+and both spectrograms. A selected-window inspector shows samples, windowed FFT,
+and optional RMS/dBFS values, with a spectrum CSV export. Both plots and listening
+use the RMS matching setting, with a common duration and a 0.95 peak cap. Display
+waveforms additionally divide by a shared peak; this does not change audio gain.
+
+The time-first study section plots energy duration and direct-arrival delay across
+all three absorption values with a table and CSV export. Energy ratios in dB are
+an optional add-on, always relative to Low at the same seat and source. No claims
+about real-world comprehension are inferred from these plots.
+
+Additional code-only checks:
+
+```powershell
+node echolab/verify_study.cjs
+node echolab/verify_timeline.cjs
+```
+
+Browser previews are intentionally left to the user. Code checks cannot establish
+visual layout quality or actual device playback synchronization.
+
+Transport lifecycle regression checks (mock audio/DOM, no browser):
+
+```powershell
+node echolab/verify_transport.cjs
+```
+
+Includes pause/seek offsets, loop wrap, stop/reset, and cancellation of stale
+asynchronous audio loads or play requests after settings change.
+
+## Plot-local listening and course-linked spectrogram reading
+
+Every audio plot now has nearby playback, pause, seek and excerpt controls. Play
+prepares the selected recording automatically at that location. Controls share a
+single player and time cursor, preventing overlapping audio. The waveform and
+both spectrograms offer local time zoom; the selected-sample and selected-FFT
+plots instead offer a local analysis-window selector. A 0.3 s excerpt is clipped
+at the recording end and ignores the full-interval loop setting. Advanced loop
+and frame-step controls are in a collapsed panel.
+
+Original and Room spectrograms have separate panels. The reading guide links to
+https://spinlabiitg.github.io/sap/speech/spectrogram.html and distinguishes harmonics,
+formant regions, noise/bursts and window effects. It is a reading guide, not an
+automatic speech classifier. The selected-window conclusion uses only measured
+RMS and the explicit near-silence threshold; it cannot identify words or establish
+intelligibility. The 4 ms (64-sample) option adds a short-window timing view.
+
+Code-only checks also cover automatic plot-local preparation, all linked sliders,
+local window versus viewport controls, excerpt boundaries and near-silence
+explanations. Run `node echolab/verify_spectrogram_guide.cjs` for the latter.
+Screen-reader status updates are centralized; continuously changing timestamp
+outputs are marked aria-live=off.

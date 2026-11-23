@@ -1,0 +1,12 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const code=fs.readFileSync(path.join(__dirname,'dist/spectrogram-guide.js'),'utf8');
+const context={};vm.createContext(context);vm.runInContext(code.replace(/export /g,''),context);
+const explain=context.explainSpectrogramSlice;
+assert.match(explain().title,/Prepare/);
+assert.match(explain({time:1,windowMs:32,kind:'voice',originalRms:0,roomRms:0}).title,/near-silent in both/);
+assert.match(explain({time:1,windowMs:32,kind:'voice',originalRms:0,roomRms:.01}).title,/continues into/);
+assert.match(explain({time:1,windowMs:32,kind:'voice',originalRms:.01,roomRms:0}).title,/room slice is near-silent/);
+const result=explain({time:.5,windowMs:64,kind:'pulse',originalRms:.1,roomRms:.2});
+assert.match(result.title,/Both tracks/);assert.match(result.result,/0.500–0.564/);assert.match(result.next,/not speech/);
+assert.match(explain({time:1,windowMs:32,originalRms:NaN,roomRms:.1}).title,/Prepare/);
+console.log('PASS: spectrogram explanations follow measured RMS states and distinguish known test clicks from unclassified speech.');
